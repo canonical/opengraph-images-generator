@@ -1,39 +1,36 @@
 <script context="module">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import Navigation from './Navigation.svelte';
-	import NavigationLink from './NavigationLink.svelte';
-	import NavigationLogo from './NavigationLogo.svelte';
-	import NavigationMenu from './NavigationMenu.svelte';
+	import * as Navigation from './index';
 
 	// More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 	const { Story } = defineMeta({
 		title: 'Navigation',
-		component: Navigation,
+		component: Navigation.Root,
 		tags: ['autodocs']
 	});
 </script>
 
 <Story name="Default">
-	<Navigation theme="dark" fullWidth>
+	<Navigation.Root theme="dark" fullWidth>
 		{#snippet logo()}
-			<NavigationLink href="/" isLogo>
-				<NavigationLogo
+			<Navigation.Link href="/" isLogo>
+				<Navigation.Logo
 					logoUrl="https://assets.ubuntu.com/v1/82818827-CoF_white.svg"
 					title="Thumbnail Generator"
 				/>
-			</NavigationLink>
+			</Navigation.Link>
 		{/snippet}
 		{#snippet leftNav()}
-			<NavigationMenu label="Menu">
-				<NavigationLink href="/">Home</NavigationLink>
-				<NavigationLink href="/about">About</NavigationLink>
-				<NavigationLink href="/contact">Contact</NavigationLink>
-			</NavigationMenu>
+			<Navigation.Menu label="Menu">
+				<Navigation.Link href="/">Home</Navigation.Link>
+				<Navigation.Link href="/about">About</Navigation.Link>
+				<Navigation.Link href="/contact">Contact</Navigation.Link>
+			</Navigation.Menu>
 		{/snippet}
 
 		{#snippet rightNav()}
-			<NavigationLink href="/">Home</NavigationLink>
-			<NavigationLink href="/about">About</NavigationLink>
+			<Navigation.Link href="/">Home</Navigation.Link>
+			<Navigation.Link href="/about">About</Navigation.Link>
 		{/snippet}
-	</Navigation>
+	</Navigation.Root>
 </Story>

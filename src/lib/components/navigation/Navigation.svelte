@@ -24,7 +24,11 @@
 	})}
 >
 	<div class={fullWidth ? 'p-navigation__row--full-width' : 'p-navigation__row'}>
-		<div class="p-navigation__row--25-75">
+		<div
+			class={clsx({
+				'p-navigation__row--25-75': leftNav && rightNav
+			})}
+		>
 			<div class="p-navigation__banner">
 				{#if logo}
 					<div class="p-navigation__tagged-logo">

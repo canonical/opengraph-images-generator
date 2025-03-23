@@ -36,7 +36,7 @@
 		</h3>
 	{/if}
 
-	<p class="p-card__content">
+	<div class="p-card__content">
 		{@render children?.()}
-	</p>
+	</div>
 </div>
