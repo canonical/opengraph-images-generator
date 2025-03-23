@@ -1,28 +1,58 @@
 <script lang="ts">
 	import clsx from 'clsx';
-	import { setContext, type Snippet } from 'svelte';
+	import { setContext, type Snippet, onMount, onDestroy } from 'svelte';
 
 	type Props = {
-		label: string;
 		/** default: 'left' */
 		align?: 'left' | 'right';
 		/**
 		 * Dropdown navigation items, look for `NavigationLink` component
 		 */
 		children?: Snippet;
-	};
+	} & (
+		| { label: string }
+		| {
+				content: Snippet;
+		  }
+	);
 
-	let { label, align = 'left', children }: Props = $props();
+	let { align = 'left', children, ...props }: Props = $props();
 
 	const menuId = $props.id();
 	let isOpen = $state(false);
+	let menuElement: HTMLElement;
 
 	setContext('menu-dropdown-class', 'p-navigation__dropdown-item');
+
+	function handleClickOutside(event: MouseEvent) {
+		if (isOpen && menuElement && !menuElement.contains(event.target as Node)) {
+			isOpen = false;
+		}
+	}
+
+	onMount(() => {
+		if (typeof window !== 'undefined') {
+			document.addEventListener('click', handleClickOutside);
+		}
+	});
+
+	onDestroy(() => {
+		if (typeof window !== 'undefined') {
+			document.removeEventListener('click', handleClickOutside);
+		}
+	});
 </script>
 
-<li class={clsx('p-navigation__item--dropdown-toggle', { 'is-active': isOpen })}>
+<li
+	bind:this={menuElement}
+	class={clsx('p-navigation__item--dropdown-toggle', { 'is-active': isOpen })}
+>
 	<button aria-controls={menuId} onclick={() => (isOpen = !isOpen)} class="p-navigation__link">
-		{label}
+		{#if 'label' in props}
+			{props.label}
+		{:else}
+			{@render props.content?.()}
+		{/if}
 	</button>
 	<ul
 		aria-hidden={!isOpen}
