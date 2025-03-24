@@ -92,4 +92,8 @@ body {
 	hr {
 		margin: 0;
 	}
+
+	.p-card__thumbnail {
+		max-height: unset;
+	}
 }
