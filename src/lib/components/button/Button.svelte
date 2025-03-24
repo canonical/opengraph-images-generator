@@ -1,6 +1,6 @@
 <script lang="ts">
 	import clsx from 'clsx';
-	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
+	import type { HTMLAnchorAttributes, HTMLButtonAttributes, HTMLAttributes } from 'svelte/elements';
 	import type { BUTTON_APPEARANCES } from './constants';
 	import type { Snippet } from 'svelte';
 
@@ -22,7 +22,11 @@
 		as: 'a';
 	} & HTMLAnchorAttributes;
 
-	type ButtonProps = ButtonBaseProps & (ButtonElProps | AnchorElProps);
+	type DivElProps = {
+		as: 'div';
+	} & HTMLAttributes<HTMLDivElement>;
+
+	type ButtonProps = ButtonBaseProps & (ButtonElProps | AnchorElProps | DivElProps);
 
 	let {
 		appearance,

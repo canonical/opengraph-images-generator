@@ -45,7 +45,6 @@ const session = {
 
 			return session;
 		} catch (error) {
-			console.error('Session verification failed:', error);
 			return null;
 		}
 	}

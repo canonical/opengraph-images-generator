@@ -8,6 +8,14 @@
 @include vf-p-icon-units;
 @include vf-p-icon-security;
 
+:root {
+	--font-sans:
+		'Ubuntu variable', 'Ubuntu', -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Cantarell',
+		'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	--font-mono: 'Ubuntu Mono', 'SFMono-Regular', 'Menlo', 'Consolas', 'Liberation Mono',
+		'monospace';
+}
+
 body {
 	.p-tabs__link,
 	.p-side-navigation__expand .p-button--base,

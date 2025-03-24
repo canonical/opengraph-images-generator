@@ -15,7 +15,9 @@
 		</Navigation.Link>
 	{/snippet}
 
-	{#snippet leftNav()}{/snippet}
+	{#snippet leftNav()}
+		<Navigation.Link href="/">Templates</Navigation.Link>
+	{/snippet}
 
 	{#snippet rightNav()}
 		<Navigation.Menu>
