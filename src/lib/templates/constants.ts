@@ -15,6 +15,7 @@ export const EXAMPLE_TEMPLATES: Template[] = [
 				position: { x: 100, y: 100, width: 1000, height: 100, zIndex: 2 },
 				fontSize: 48,
 				fontWeight: 'bold',
+				lineHeight: 1.2,
 				color: '#333333',
 				alignment: 'center',
 				description: 'Post headline'

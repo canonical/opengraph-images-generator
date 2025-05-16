@@ -63,6 +63,7 @@
 		"clsx": "^2.1.1",
 		"dom-to-image": "^2.6.0",
 		"interactjs": "^1.10.27",
+		"lucide-svelte": "^0.510.0",
 		"vanilla-framework": "^4.21.1"
 	}
 }

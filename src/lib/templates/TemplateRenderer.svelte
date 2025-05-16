@@ -60,24 +60,20 @@
 		onFieldInput(id, value);
 	}
 
-	function handleFieldBlur(id: string) {
+	function handleFieldBlur(_id: string) {
 		selectedFieldId = undefined;
 	}
 
 	function getMergedField(field: Field): Field {
 		if (fieldMetadata[field.id]) {
-			// Create a new field object with the base field properties
 			const mergedField: Field = { ...field };
 
-			// Apply metadata properties that are applicable to this field type
 			const metadata = fieldMetadata[field.id];
 
-			// Apply position if it exists in metadata
 			if (metadata.position) {
 				mergedField.position = { ...field.position, ...metadata.position };
 			}
 
-			// Apply type-specific properties
 			if (field.type === 'text' && isTextField(field)) {
 				const textField = mergedField as TextField;
 				if (metadata.fontSize !== undefined) textField.fontSize = metadata.fontSize;
@@ -103,8 +99,13 @@
 	{#if template.backgroundImage}
 		<img
 			class="background-image"
-			src={`/generate/api?assetUrl=${template.backgroundImage}`}
+			src={template.backgroundImage.startsWith('http')
+				? `/generate/api?assetUrl=${template.backgroundImage}`
+				: template.backgroundImage}
 			alt="Background"
+			style:width="100%"
+			style:height="auto"
+			style:translate="translateY(-50%)"
 		/>
 	{/if}
 	{#each sortedFields as field (field.id)}
@@ -116,6 +117,8 @@
 			onUpdate={handleFieldUpdate}
 			onInput={handleFieldInput}
 			onBlur={handleFieldBlur}
+			templateWidth={template.width}
+			templateHeight={template.height}
 		/>
 	{/each}
 </div>

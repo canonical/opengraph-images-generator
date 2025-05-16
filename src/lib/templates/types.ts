@@ -21,6 +21,7 @@ export interface TextField extends BaseField {
 	fontSize?: number;
 	fontFamily?: string;
 	fontWeight?: string | number;
+	lineHeight?: number;
 	color?: string;
 	alignment?: 'left' | 'center' | 'right';
 }

@@ -79,15 +79,17 @@
 			<button class="remove-image" onclick={clearImage}>
 				<X size={16} />
 			</button>
-			<div class="dimensions-info">
-				{imageWidth} × {imageHeight}
-			</div>
+			{#if imageWidth > 0 && imageHeight > 0}
+				<div class="dimensions-info">
+					{imageWidth} × {imageHeight}
+				</div>
+			{/if}
 		</div>
 	{:else}
 		<div class="drop-zone">
 			<p>Drag image here or</p>
 			<label for={`file-${fieldId}`}>
-				<Button as="div">Select file</Button>
+				<Button appearance="base" dense as="div">Select file</Button>
 			</label>
 		</div>
 	{/if}

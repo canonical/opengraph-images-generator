@@ -14,19 +14,18 @@
 	let isCapturing = $state(false);
 	let fieldValues = $state<Record<string, string>>({});
 	let fieldMetadata = $state<Record<string, Record<string, any>>>({});
+	let customBackgroundColor = $state(selectedTemplate.backgroundColor || '#ffffff');
+	let customBackgroundImage = $state(selectedTemplate.backgroundImage || '');
 
-	// Initialize field metadata from template
 	$effect(() => {
 		if (selectedTemplate) {
 			selectedTemplate.fields.forEach((field) => {
 				if (!fieldMetadata[field.id]) {
-					// Store basic field properties
 					fieldMetadata[field.id] = {
 						type: field.type,
 						position: { ...field.position }
 					};
 
-					// Add type-specific properties
 					if (field.type === 'image' && 'objectFit' in field) {
 						fieldMetadata[field.id].objectFit = field.objectFit;
 					}
@@ -44,12 +43,10 @@
 		}
 	});
 
-	// Listen for image dimensions event
 	onMount(() => {
 		const handleImageDimensions = (event: CustomEvent) => {
 			const { fieldId, width, height } = event.detail;
 
-			// Update the field metadata with dimensions
 			handleFieldUpdate(fieldId, {
 				width,
 				height,
@@ -72,7 +69,6 @@
 		handleFieldInput(fieldId, value);
 	};
 
-	// Update any field property
 	const handleFieldUpdate = (id: string, updates: Record<string, any>) => {
 		fieldMetadata = {
 			...fieldMetadata,
@@ -84,7 +80,6 @@
 	};
 
 	const captureScreenshot = async () => {
-		// Use the container ref for more precise capture
 		const element = document.querySelector('.template-container') as HTMLElement;
 		if (!element) return null;
 
@@ -98,7 +93,6 @@
 				}
 			});
 
-			// Convert the data URL to a canvas for consistency with previous return type
 			const canvas = document.createElement('canvas');
 			const img = new Image();
 			await new Promise((resolve) => {
@@ -138,6 +132,17 @@
 	const handleImageDimensions = (fieldId: string, width: number, height: number) => {
 		handleFieldUpdate(fieldId, { width, height, aspectRatio: width / height });
 	};
+
+	const updateBackgroundColor = (color: string) => {
+		customBackgroundColor = color;
+	};
+
+	const updateBackgroundImage = (_fieldId: string, imageUrl: string) => {
+		console.log('imageUrl', imageUrl);
+		customBackgroundImage = imageUrl;
+	};
+
+	const hasBackgroundImage = () => selectedTemplate.backgroundImage !== undefined;
 </script>
 
 <Strip shallow>
@@ -160,12 +165,61 @@
 		</div>
 
 		<TemplateRenderer
-			template={selectedTemplate}
+			template={{
+				...selectedTemplate,
+				backgroundColor: customBackgroundColor,
+				backgroundImage: customBackgroundImage
+			}}
 			{fieldValues}
 			{fieldMetadata}
 			onFieldInput={handleFieldInput}
 			onFieldUpdate={handleFieldUpdate}
 		/>
+
+		<Strip>
+			<h3>Background Customization</h3>
+			<Row>
+				{#if hasBackgroundImage()}
+					<Col size={6}>
+						<fieldset>
+							<legend>Background Image</legend>
+							<ImageDropInput
+								fieldId="background-image"
+								value={customBackgroundImage}
+								onInput={updateBackgroundImage}
+								onDimensionsChange={() => {}}
+							/>
+							{#if customBackgroundImage}
+								<Button
+									dense
+									appearance="base"
+									onclick={() => updateBackgroundImage('background-image', '')}
+								>
+									Remove Image
+								</Button>
+							{/if}
+						</fieldset>
+					</Col>
+				{/if}
+
+				<Col size={hasBackgroundImage() ? 6 : 12}>
+					<fieldset>
+						<legend>Background Color</legend>
+						<div class="color-selector">
+							<label for="background-color">Color:</label>
+							<input
+								type="color"
+								id="background-color"
+								value={customBackgroundColor}
+								oninput={(e) => updateBackgroundColor(e.currentTarget.value)}
+								class="color-input"
+							/>
+							<code>{customBackgroundColor}</code>
+						</div>
+					</fieldset>
+				</Col>
+			</Row>
+		</Strip>
 
 		{#if selectedTemplate.fields.length > 0}
 			<Strip>
@@ -185,6 +239,21 @@
 										oninput={(e) => handleFieldInput(field.id, e.currentTarget.value)}
 										placeholder={field.description || 'Enter text'}
 									/>
+
+									{#if field.type === 'text'}
+										<div class="color-selector">
+											<label for={`${field.id}-color`}>Text color:</label>
+											<input
+												type="color"
+												id={`${field.id}-color`}
+												value={fieldMetadata[field.id]?.color || '#000000'}
+												oninput={(e) =>
+													handleFieldUpdate(field.id, { color: e.currentTarget.value })}
+												class="color-input"
+											/>
+											<code>{fieldMetadata[field.id]?.color || '#000000'}</code>
+										</div>
+									{/if}
 								{:else if field.type === 'image'}
 									<ImageDropInput
 										fieldId={field.id}
@@ -224,5 +293,40 @@
 			align-items: center;
 			gap: 0.5rem;
 		}
+	}
+
+	.color-selector {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-top: 0.5rem;
+	}
+
+	.color-input {
+		width: 1.5rem;
+		height: 1.5rem;
+		padding: 0;
+		border: none;
+		cursor: pointer;
+		overflow: hidden;
+	}
+
+	fieldset {
+		margin-bottom: 1rem;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+	}
+
+	legend {
+		padding: 0 0.5rem;
+		font-weight: bold;
+	}
+
+	input[type='text'] {
+		width: 100%;
+		padding: 0.5rem;
+		margin-top: 0.25rem;
+		border: 1px solid #ddd;
+		border-radius: 4px;
 	}
 </style>
