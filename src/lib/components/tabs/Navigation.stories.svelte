@@ -3,12 +3,12 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 
 	const { Story } = defineMeta({
-		title: 'Tabs',
+		title: 'components/Tabs',
 		tags: ['autodocs']
 	});
 </script>
 
-<Story name="Default">
+<Story name="Default" asChild>
 	<Tabs.Root value="account">
 		<Tabs.List>
 			<Tabs.Trigger value="account">Account</Tabs.Trigger>

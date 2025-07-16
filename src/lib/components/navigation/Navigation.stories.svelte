@@ -1,16 +1,18 @@
 <script context="module">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import * as Navigation from './index';
+	import { Root } from './index';
+	import '../../../app.scss';
 
 	// More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 	const { Story } = defineMeta({
-		title: 'Navigation',
-		component: Navigation.Root,
+		title: 'components/Navigation',
+		component: Root,
 		tags: ['autodocs']
 	});
 </script>
 
-<Story name="Default">
+<Story name="Default" asChild>
 	<Navigation.Root theme="dark" fullWidth>
 		{#snippet logo()}
 			<Navigation.Link href="/" isLogo>

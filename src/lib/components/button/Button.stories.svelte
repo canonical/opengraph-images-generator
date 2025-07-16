@@ -1,9 +1,10 @@
 <script context="module">
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import Button from './Button.svelte';
+	import '../../../app.scss';
 
 	const { Story } = defineMeta({
-		title: 'Button',
+		title: 'components/Button',
 		component: Button,
 		tags: ['autodocs']
 	});
@@ -19,7 +20,7 @@
 		}
 	}}
 >
-	<Button>Button</Button>
+	Button
 </Story>
 
 <Story
@@ -31,8 +32,11 @@
 			}
 		}
 	}}
+	args={{
+		disabled: true
+	}}
 >
-	<Button disabled>Button</Button>
+	Button
 </Story>
 
 <Story
@@ -44,8 +48,11 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'base'
+	}}
 >
-	<Button appearance="base">Base button</Button>
+	Base button
 </Story>
 
 <Story
@@ -57,8 +64,12 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'base',
+		disabled: true
+	}}
 >
-	<Button appearance="base" disabled>Base button disabled</Button>
+	Base button disabled
 </Story>
 
 <Story
@@ -70,8 +81,11 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'link'
+	}}
 >
-	<Button appearance="link">Link button</Button>
+	Link button
 </Story>
 
 <Story
@@ -83,8 +97,12 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'link',
+		disabled: true
+	}}
 >
-	<Button appearance="link" disabled>Link button disabled</Button>
+	Link button disabled
 </Story>
 
 <Story
@@ -96,8 +114,11 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'positive'
+	}}
 >
-	<Button appearance="positive">Positive button</Button>
+	Positive button
 </Story>
 
 <Story
@@ -109,8 +130,12 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'positive',
+		disabled: true
+	}}
 >
-	<Button appearance="positive" disabled>Positive button disabled</Button>
+	Positive button disabled
 </Story>
 
 <Story
@@ -122,8 +147,11 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'negative'
+	}}
 >
-	<Button appearance="negative">Negative button</Button>
+	Negative button
 </Story>
 
 <Story
@@ -135,8 +163,12 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'negative',
+		disabled: true
+	}}
 >
-	<Button appearance="negative" disabled>Negative button disabled</Button>
+	Negative button disabled
 </Story>
 
 <Story
@@ -148,8 +180,11 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'brand'
+	}}
 >
-	<Button appearance="brand">Brand button</Button>
+	Brand button
 </Story>
 
 <Story
@@ -161,8 +196,12 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'brand',
+		disabled: true
+	}}
 >
-	<Button appearance="brand" disabled>Brand button disabled</Button>
+	Brand button disabled
 </Story>
 
 <Story
@@ -174,9 +213,12 @@
 			}
 		}
 	}}
+	args={{
+		inline: true
+	}}
 >
 	<span>Everything you need to get started with Vanilla.</span>
-	<Button inline>Inline button</Button>
+	Inline button
 </Story>
 
 <Story
@@ -188,9 +230,12 @@
 			}
 		}
 	}}
+	args={{
+		dense: true
+	}}
 >
 	<span>Everything you need to get started with Vanilla.</span>
-	<Button dense>Dense button</Button>
+	Dense button
 </Story>
 
 <Story
@@ -202,9 +247,11 @@
 			}
 		}
 	}}
+	args={{
+		small: true
+	}}
 >
-	<Button small>Small button</Button>
-	<Button small dense>Small dense button</Button>
+	Small button Small dense button
 </Story>
 
 <Story
@@ -216,10 +263,11 @@
 			}
 		}
 	}}
+	args={{
+		hasIcon: true
+	}}
 >
-	<Button hasIcon>
-		<i class="p-icon--plus"></i>
-	</Button>
+	<i class="p-icon--plus"></i>
 </Story>
 
 <Story
@@ -231,10 +279,11 @@
 			}
 		}
 	}}
+	args={{
+		hasIcon: true
+	}}
 >
-	<Button hasIcon>
-		<i class="p-icon--plus"></i> <span>Button with icon & text</span>
-	</Button>
+	<i class="p-icon--plus"></i> <span>Button with icon & text</span>
 </Story>
 
 <Story
@@ -246,8 +295,13 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'base',
+		as: 'a',
+		href: '#test'
+	}}
 >
-	<Button appearance="base" as="a" href="#test">Button as link</Button>
+	Button as link
 </Story>
 
 <Story
@@ -259,6 +313,12 @@
 			}
 		}
 	}}
+	args={{
+		appearance: 'base',
+		as: 'a',
+		href: '#test',
+		disabled: true
+	}}
 >
-	<Button appearance="base" as="a" href="#test" disabled>Button as link disabled</Button>
+	Button as link disabled
 </Story>

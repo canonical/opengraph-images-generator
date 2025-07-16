@@ -45,6 +45,7 @@ const session = {
 
 			return session;
 		} catch (error) {
+			console.error(error);
 			return null;
 		}
 	}

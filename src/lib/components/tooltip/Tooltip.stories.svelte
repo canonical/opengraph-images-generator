@@ -3,12 +3,12 @@
 	import * as Tooltip from '$lib/components/tooltip';
 
 	const { Story } = defineMeta({
-		title: 'Tooltip',
+		title: 'components/Tooltip',
 		tags: ['autodocs']
 	});
 </script>
 
-<Story name="Default">
+<Story name="Default" asChild>
 	<Tooltip.Provider>
 		<Tooltip.Root>
 			<Tooltip.Trigger>Hover</Tooltip.Trigger>

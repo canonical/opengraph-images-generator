@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Navigation from '$lib/components/navigation';
-	import '../../app.scss';
+	import '../app.scss';
 
 	let { children, data } = $props();
 </script>
@@ -28,7 +28,6 @@
 						src={data.session.photo}
 						alt={data.session.name}
 					/>
-					{data.session.name}
 				</div>
 			{/snippet}
 			<Navigation.Link href="/auth/google/logout">Logout</Navigation.Link>
