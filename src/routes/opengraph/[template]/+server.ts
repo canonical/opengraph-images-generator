@@ -8,6 +8,7 @@ import { html } from 'satori-html';
 import { render } from 'svelte/server';
 import z from 'zod';
 import templates from '../../../templates/index.js';
+import { applyDefaultFlexStyle } from './(utils)/index.js';
 
 const fontData = read(UbuntuSansVariable).arrayBuffer();
 
@@ -49,7 +50,7 @@ export const GET: RequestHandler = async (event) => {
 		props: inputProps
 	});
 
-	const reactLike = html(renderedComponent.head + renderedComponent.body);
+	const reactLike = applyDefaultFlexStyle(html(renderedComponent.head + renderedComponent.body));
 
 	let svg: string;
 	try {
@@ -58,7 +59,7 @@ export const GET: RequestHandler = async (event) => {
 			height: template.height,
 			fonts: [
 				{
-					name: 'Ubuntu variable',
+					name: 'Ubuntu Sans',
 					data: await fontData
 				}
 			]
