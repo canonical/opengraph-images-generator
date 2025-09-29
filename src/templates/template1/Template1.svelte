@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { TemplateInput } from '../inputs';
+	import type { Template1Input } from './schema';
 
-	let { title, date, category, description }: TemplateInput = $props();
+	let { title, date, category, description }: Template1Input = $props();
 
 	const d = new Date(date);
 
@@ -26,8 +26,8 @@
 	<img
 		src="https://assets.ubuntu.com/v1/d11e6f0f-05_suru2_light_glow_3K.jpg"
 		alt=""
-		width="1024"
-		height="576"
+		width="100%"
+		height="100%"
 	/>
 </div>
 <hr id="marker" />
@@ -58,6 +58,7 @@
 
 <style>
 	article {
+		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -130,7 +131,7 @@
 
 	#marker {
 		position: absolute;
-		top: 140px;
+		top: 30%;
 		left: 0;
 		width: 4px;
 		height: 158px;

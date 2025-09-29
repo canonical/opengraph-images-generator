@@ -1,13 +1,11 @@
-import { session } from '$lib/server/oauth';
-import { redirect } from '@sveltejs/kit';
+import type { ColorScheme } from '$lib/components/utils';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async (event) => {
-	const s = await session.verify(event.cookies.get('session'));
-	if (!s) {
-		throw redirect(303, '/auth/login');
-	}
+	const colorScheme = event.cookies.get('colorScheme') as ColorScheme | undefined;
 	return {
-		session: s
+		colorScheme: (['light', 'dark'] as ColorScheme[]).includes(colorScheme!)
+			? colorScheme
+			: undefined
 	};
 };

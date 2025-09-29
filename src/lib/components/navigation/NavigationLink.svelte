@@ -14,6 +14,7 @@
 
 	type BaseProps = {
 		children: Snippet;
+		isLogo?: boolean;
 	};
 
 	type NavigationLinkProps = BaseProps & (ButtonProps | AnchorProps);
@@ -21,7 +22,7 @@
 	// eslint-disable-next-line svelte/no-unused-props
 	let props: NavigationLinkProps = $props();
 
-	let { as = 'a', children, ...restProps } = props;
+	let { as = 'a', isLogo, children, ...restProps } = props;
 
 	const isSelected = $derived('href' in restProps ? restProps.href === page.url.pathname : false);
 	const menuDropdownClass = getContext<string>('menu-dropdown-class');
@@ -37,7 +38,7 @@
 	</svelte:element>
 {/snippet}
 
-{#if menuDropdownClass}
+{#if menuDropdownClass || isLogo}
 	{@render content()}
 {:else}
 	<li
