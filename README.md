@@ -1,38 +1,103 @@
-# sv
+# Thumbnail Generator
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A SvelteKit application for generating Open Graph (OG) images using customizable templates. This tool allows you to create social media thumbnails and preview images programmatically.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Template-based Image Generation** - Generate images using predefined templates
+- **PNG and SVG Output** - Export images in multiple formats
+- **URL-based API** - Generate images via HTTP requests
+- **SvelteKit Application** - Web interface for template exploration
+
+## Local Development
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm, yarn, or bun package manager
+
+### Installation
+
+1. Clone the repository:
 
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+git clone https://github.com/canonical/thumbnail-generator
+cd thumbnail-generator
 ```
 
-## Developing
+2. Install dependencies:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```bash
+npm install
+# or
+yarn install
+# or
+bun install
+```
+
+### Running the Application
+
+Start the development server:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# or
+yarn dev
+# or
+bun dev
 ```
 
-## Building
+The application will be available at `http://localhost:5173`
 
-To create a production version of your app:
+## Using the OG Image Generator
 
-```bash
-npm run build
+### API Endpoints
+
+#### Generate OG Image
+
+```
+GET /opengraph/{template}?{parameters}
 ```
 
-You can preview the production build with `npm run preview`.
+**Parameters:**
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- `format` (optional): Output format - `png` or `svg` (default: `png`)
+- `scale` (optional): Scale factor for PNG output - number between 1-10 (default: 1)
+- Template-specific parameters (see template schemas below)
+
+### Web Interface
+
+Visit the homepage at `http://localhost:5173` to:
+
+- Browse available templates
+- See template previews with example data
+- Click on templates to explore them in detail
+- View template parameters and examples
+
+### Template Development
+
+Templates are located in `src/templates/` and follow this structure:
+
+```
+templates/
+├── {template-name}/
+│   ├── index.ts          # Template definition
+│   ├── schema.ts         # Zod validation schema
+│   ├── {Template}.svelte # Svelte component
+│   └── assets/           # Template assets
+```
+
+Each template must export:
+
+- `id`: Unique template identifier
+- `component`: Svelte component
+- `schema`: Zod validation schema
+- `width` and `height`: Image dimensions
+- `example`: Example data for the template
+
+## Architecture
+
+- **Frontend**: SvelteKit with Svelte 5
+- **Image Generation**: Satori + Resvg for SVG to PNG conversion
+- **Styling**: Vanilla Framework (Canonical's design system)
+- **Validation**: Zod for schema validation
