@@ -1,5 +1,5 @@
-import { template1 } from './template1/index.js';
+import { masterclasses } from './masterclasses/index.js';
 import { lpMergeProposal } from './launchpad-merge-proposal/index.js';
-const templates = [template1, lpMergeProposal] as const;
+const templates = [masterclasses, lpMergeProposal] as const;
 
 export default templates;

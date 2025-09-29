@@ -86,14 +86,16 @@ export const GET: RequestHandler = async (event) => {
 
 			return new Response(Buffer.from(png), {
 				headers: {
-					'Content-Type': 'image/png'
+					'Content-Type': 'image/png',
+					'Cache-Control': 'public, max-age=3600'
 				}
 			});
 		}
 		case 'svg':
 			return new Response(svg, {
 				headers: {
-					'Content-Type': 'image/svg+xml'
+					'Content-Type': 'image/svg+xml',
+					'Cache-Control': 'public, max-age=3600'
 				}
 			});
 	}

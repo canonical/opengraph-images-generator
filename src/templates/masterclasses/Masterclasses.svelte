@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Template1Input } from './schema';
+	import type { MasterclassesInput } from './schema';
 
-	let { title, date, category, description }: Template1Input = $props();
+	let { title, date, category, description, avatar }: MasterclassesInput = $props();
 
 	const d = new Date(date);
 
@@ -22,7 +22,7 @@
 	const formattedDate = `${month} ${day}, ${usTime} EST | ${euTime} CET`;
 </script>
 
-<div id="suru-background" style="display: flex;">
+<div id="suru-background">
 	<img
 		src="https://assets.ubuntu.com/v1/d11e6f0f-05_suru2_light_glow_3K.jpg"
 		alt=""
@@ -39,7 +39,7 @@
 			width="134"
 			height="42"
 		/>
-		<div id="date-category" style="display: flex;">
+		<div id="date-category">
 			{#if category}
 				<span class="category">{category}</span>
 			{/if}
@@ -47,12 +47,15 @@
 		</div>
 	</header>
 	<main>
-		<div id="title-description" style="display: flex;">
+		<div id="title-description">
 			<h1>{title}</h1>
 			{#if description}
 				<p>{description}</p>
 			{/if}
 		</div>
+		{#if avatar}
+			<img src={avatar} alt="Avatar" width={160} height={160} class="avatar" />
+		{/if}
 	</main>
 </article>
 
@@ -81,6 +84,7 @@
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: center;
+		gap: 5px;
 	}
 
 	time {
@@ -95,8 +99,10 @@
 	main {
 		flex: 1;
 		display: flex;
+		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		width: 100%;
 	}
 
 	#title-description {
@@ -104,12 +110,16 @@
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: center;
-		gap: 0.25rem;
+		max-width: 600px;
+		text-wrap: balance;
 	}
 
 	h1 {
 		font-size: 3.3125rem;
 		font-weight: 600;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-wrap: balance;
 	}
 
 	p {
@@ -136,5 +146,10 @@
 		width: 4px;
 		height: 158px;
 		background-color: #ea5f2d;
+	}
+
+	.avatar {
+		border-radius: 100%;
+		overflow: hidden;
 	}
 </style>
