@@ -27,10 +27,6 @@ cd thumbnail-generator
 2. Install dependencies:
 
 ```bash
-npm install
-# or
-yarn install
-# or
 bun install
 ```
 
@@ -39,10 +35,6 @@ bun install
 Start the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 bun dev
 ```
 
