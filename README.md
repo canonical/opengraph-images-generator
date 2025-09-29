@@ -13,8 +13,7 @@ A SvelteKit application for generating Open Graph (OG) images using customizable
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
-- npm, yarn, or bun package manager
+bun.js
 
 ### Installation
 
