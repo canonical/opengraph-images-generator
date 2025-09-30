@@ -18,7 +18,7 @@
 			<Navigation.Link href="/" isLogo>
 				<Navigation.Logo
 					logoUrl="https://assets.ubuntu.com/v1/82818827-CoF_white.svg"
-					title="Thumbnail Generator"
+					title="OG Image Generator"
 				/>
 			</Navigation.Link>
 		{/snippet}

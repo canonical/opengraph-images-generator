@@ -1,4 +1,4 @@
-# Thumbnail Generator
+# Open Graph (OG) Image Generator
 
 A SvelteKit application for generating Open Graph (OG) images using customizable templates. This tool allows you to create social media thumbnails and preview images programmatically.
 
@@ -20,8 +20,8 @@ bun.js
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/canonical/thumbnail-generator
-cd thumbnail-generator
+git clone https://github.com/canonical/open-graph-images-generator
+cd open-graph-images-generator
 ```
 
 2. Install dependencies:
