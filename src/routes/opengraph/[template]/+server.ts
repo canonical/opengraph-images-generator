@@ -69,7 +69,7 @@ export const GET: RequestHandler = async (event) => {
 		error(500, 'Error generating image (Satori)');
 	}
 
-	const format = parsedFormat.data?.format || 'png';
+	const format = parsedFormat.data?.format || 'svg';
 	switch (format) {
 		case 'png': {
 			const scale =
